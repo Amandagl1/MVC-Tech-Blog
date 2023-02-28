@@ -2,16 +2,16 @@ const router = require('express').Router();
 const { Comment, Post } = require('../models');
 const withAuth = require('../utils/auth');
 
+// Works
 router.get('/', async (req, res) => {
   try {
     // Get all posts and JOIN with user data
     const postData = await Post.findAll({
-      // include: [
-      //   {
-      //     model: Comment,
-      //     attributes: ['name'],
-      //   },
-      // ],
+      include: [
+        {
+          model: Comment,
+        },
+      ],
     });
 
     // Serialize data
@@ -26,20 +26,21 @@ router.get('/', async (req, res) => {
   }
 });
 
-router.get('/posts/:id', async (req, res) => {
+// Works
+router.get('/post/:id', async (req, res) => {
   try {
-    const postsData = await Posts.findByPk(req.params.id, {
+    const postsData = await Post.findByPk(req.params.id, {
       include: [
         {
-          model: Comments,
-          attributes: ['name'],
+          model: Comment,
         },
       ],
     });
 
     const posts = postsData.get({ plain: true });
+    // res.json(posts);
 
-    res.render('posts', {
+    res.render('post', {
       ...posts,
       logged_in: req.session.logged_in
     });
@@ -68,13 +69,21 @@ router.get('/profile', withAuth, async (req, res) => {
 });
 
 router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
   if (req.session.logged_in) {
     res.redirect('/profile');
     return;
   }
 
   res.render('login');
+});
+
+router.get('/signup', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect('/profile');
+    return;
+  }
+
+  res.render('signup');
 });
 
 module.exports = router;

@@ -1,19 +1,14 @@
 // Requiring in dependencies
-const express = require('express');
-const routes = require('./controllers');
-const sequelize = require('./config/connection');
 const path = require('path');
-
-// const helpers = require('./utils/helpers');
-
-const exphbs = require('express-handlebars');
-const hbs = exphbs.create();
-
+const express = require('express');
 const session = require('express-session');
+const exphbs = require('express-handlebars');
+const helpers = require('./utils/helpers');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sess = {
@@ -27,9 +22,12 @@ const sess = {
   };
 
 app.use(session(sess));
+const hbs = exphbs.create({ helpers });
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+
+const routes = require('./controllers');
 
 // Requiring in static middleware
 app.use(express.json());
