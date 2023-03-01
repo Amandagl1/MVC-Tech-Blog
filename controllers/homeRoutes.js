@@ -3,7 +3,7 @@ const { Comment, Post } = require('../models');
 const withAuth = require('../utils/auth');
 
 // Works
-router.get('/', async (req, res) => {
+router.get('/', async(req, res) => {
   try {
     // Get all posts and JOIN with user data
     const postData = await Post.findAll({
@@ -52,7 +52,7 @@ router.get('/post/:id', async (req, res) => {
 router.get('/profile', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
-    const commentsData = await Comments.findByPk(req.session.user_id, {
+    const commentsData = await Comment.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
       include: [{ model: Posts }],
     });
