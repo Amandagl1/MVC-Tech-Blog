@@ -6,17 +6,16 @@ router.get('/', withAuth, async(req, res) => {
     // console.log();
     const userId = req.session.userId || req.session.user_id
     try {
-        const userData = await User.findByPk(userId, {
-          attributes: { exclude: ['password'] },
-          include: [{ model: Post }],
+        const postData = await Post.findAll({
+            where: {id: userId},
+            include:[User, Comment]
         });
     
-        const user = userData.get({ plain: true });
-        // console.log(user);
-        // res.json(user);
+        const posts = postData.map((post) => post.get({ plain: true }));
+        // res.json(posts)
         res.render('profile', {
-          ...user,
-          logged_in: true
+          posts,
+          logged_in: req.session.logged_in
         });
       } catch (err) {
         res.status(500).json(err);
