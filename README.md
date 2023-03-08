@@ -9,7 +9,6 @@ Deployed Application: https://techblog-mvc1.herokuapp.com/
 - [User Story](#user-story)
 - [Acceptance Criteria](#acceptance-criteria)
 - [Installation](#installation)
-- [Tests](#tests)
 - [Usage](#usage)
 - [Contact](#contact)
 
@@ -75,17 +74,8 @@ THEN I am able to view comments but I am prompted to log in again before I can a
 - [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize) 
 
 
-<!-- **Open the application in the browser once the app is starts running:**
-```
-App listening on port 3001!
-```
-
-## Tests
-**To test the application, run this code in the CLI:**
-```
-npm start
-``` -->
-
+## Usage
+<img src= "assets/demo.png" alt="Demo Screenshot" width="700px">
 
 ## Contact
 
