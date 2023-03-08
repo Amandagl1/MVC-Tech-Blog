@@ -1,0 +1,27 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    background-color: lavenderblush;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande';
+    color: brown;
+}
+
+h1 a {
+    display: block;
+    background-color: burlywood;
+    padding: 10px;
+}
+
+nav {
+    margin: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+h2 {
+    margin: 10px;
+}
+
+.row {
+    margin: 10px;
+}
